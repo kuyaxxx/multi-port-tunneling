@@ -3,7 +3,7 @@ MYIP=$(wget -qO- ipinfo.io/ip);
 clear
 domain=$(cat /etc/xray/domain)
 sleep 1
-mkdir -p /etc/xray 
+##mkdir -p /etc/xray 
 #
 apt install iptables iptables-persistent -y
 sleep 1
@@ -38,7 +38,7 @@ domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 # Make Folder XRay
 mkdir -p /var/log/xray
-mkdir -p /etc/xray
+##mkdir -p /etc/xray
 chown www-data.www-data /var/log/xray
 chmod +x /var/log/xray
 touch /var/log/xray/access.log
@@ -56,7 +56,7 @@ xraycore_link="https://github.com/XTLS/Xray-core/releases/download/v$latest_vers
 
 # / / Make Main Directory
 mkdir -p /usr/bin/xray
-mkdir -p /etc/xray
+##mkdir -p /etc/xray
 mkdir -p /usr/local/etc/xray
 # / / Unzip Xray Linux 64
 cd `mktemp -d`
@@ -77,7 +77,8 @@ bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release
 
 # set uuid
 uuid9=$(cat /proc/sys/kernel/random/uuid)
-uuid=b8458948-a630-4e6d-809a-230b2223ff3d
+#uuid=b8458948-a630-4e6d-809a-230b2223ff3d
+uuid=7a0c7df7-aa51-4e15-b8a1-5311f3a34dce
 
 # buat xray config
 cat > /etc/xray/config.json << END

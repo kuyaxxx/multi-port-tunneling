@@ -31,7 +31,16 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/tools.s
 #
 #Instal Xray
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/xray.sh && chmod +x xray.sh && ./xray.sh
-#install xmenu
+#Instal SSH
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/ssh/ssh.sh && chmod +x ssh.sh && ./ssh.sh
+#Instal SSLH
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/sslh/sslh.sh && chmod +x sslh.sh && ./sslh.sh
+#Instal Stunnel5
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/stunnel5/stunnel5.sh && chmod +x stunnel5.sh && ./stunnel5.sh
+#Instal websocket
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/websocket/websocket.sh && chmod +x websocket.sh && ./websocket.sh
+
+#install menu
 wget https://raw.githubusercontent.com/fisabiliyusri/XRAY-MANTAP/main/menu/updatedll.sh && chmod +x updatedll.sh && ./updatedll.sh
 #
 #SELESAI
