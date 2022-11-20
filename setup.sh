@@ -41,7 +41,7 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/stunnel
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/websocket/websocket.sh && chmod +x websocket.sh && ./websocket.sh
 
 #install menu
-wget https://raw.githubusercontent.com/fisabiliyusri/XRAY-MANTAP/main/menu/updatedll.sh && chmod +x updatedll.sh && ./updatedll.sh
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu/menu.sh && chmod +x menu.sh && ./menu.sh
 #
 #SELESAI
 echo " "
