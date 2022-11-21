@@ -54,7 +54,7 @@ clear
 #
 # OPENSSH
 # CEK SSH OPENSSH
-ssh_service=$(/etc/init.d/ssh status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+ssh_service=$(/etc/init.d/ssh status | grep Active | awk 'NR==1 {print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
 # STATUS SERVICE  SSH 
 if [[ $ssh_service == "running" ]]; then 
    status_ssh=" ${GREEN}Running ${NC}( No Error )"
@@ -71,16 +71,6 @@ if [[ $dropbear_service == "running" ]]; then
    status_beruangjatuh=" ${GREEN}Running${NC} ( No Error )${NC}"
 else
    status_beruangjatuh="${RED}  Not Running ${NC}  ( Error )${NC}"
-fi
-
-# SLOWDNS CLIENT
-# CEK SLOWDNS CLIENT
-slowdns_client_service=$(systemctl status client-sldns | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-# STATUS SLOWDNS SERVER
-if [[ $slowdns_client_service == "running" ]]; then 
-   status_slowdns_client=" ${GREEN}Running${NC} ( No Error )${NC}"
-else
-   status_slowdns_client="${RED}  Not Running ${NC}  ( Error )${NC}"
 fi
 
 # SSLH
@@ -168,7 +158,6 @@ total_ram=` grep "MemTotal: " /proc/meminfo | awk '{ print $2}'`
 totalram=$(($total_ram/1024))
 # GETTING DOMAIN NAME
 Domen="$(cat /etc/xray/domain)"
-Slow="$(cat /root/nsdomain)"
 uphours=`uptime -p | awk '{print $2,$3}' | cut -d , -f1`
 upminutes=`uptime -p | awk '{print $4,$5}' | cut -d , -f1`
 uptimecek=`uptime -p | awk '{print $6,$7}' | cut -d , -f1`
@@ -184,7 +173,6 @@ echo -e "❇️ OS Name     : $Tipe"
 echo -e "❇️ Total RAM   : ${totalram}MB"
 echo -e "❇️ Public IP   : $MYIP"
 echo -e "❇️ Domain      : $Domen"
-echo -e "❇️ NS Domain   : $Slow"
 echo -e "❇️ ISP         : $ISPVPS"
 echo -e "❇️ Waktu Aktif : $uphours $upminutes $uptimecek"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"

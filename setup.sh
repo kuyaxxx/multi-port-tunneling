@@ -31,6 +31,10 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/tools.s
 #
 #Instal Xray
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/xray.sh && chmod +x xray.sh && ./xray.sh
+#Instal Xray Certificate
+wget -O /usr/bin/certxray "https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu-xray/certxray.sh";chmod +x /usr/bin/certxray;/usr/bin/certxray
+
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/certxray.sh && chmod +x certxray.sh && ./certxray.sh
 #Instal SSH
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/ssh/ssh.sh && chmod +x ssh.sh && ./ssh.sh
 #Instal SSLH
@@ -39,54 +43,19 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/sslh/ss
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/stunnel5/stunnel5.sh && chmod +x stunnel5.sh && ./stunnel5.sh
 #Instal websocket
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/websocket/websocket.sh && chmod +x websocket.sh && ./websocket.sh
-
 #install menu
-wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu/menu.sh && chmod +x menu.sh && ./menu.sh
+wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu/install-menu.sh && chmod +x install-menu.sh && ./install-menu.sh
 #
 #SELESAI
-echo " "
-echo "Installation has been completed!!"echo " "
-echo "============================================================================" | tee -a log-install.txt
-echo "" | tee -a log-install.txt
-echo "----------------------------------------------------------------------------" | tee -a log-install.txt
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"  | tee -a log-install.txt
-echo -e "    SCRIPT MANTAP-XRAY Multi Port"  | tee -a log-install.txt
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Service & Port"  | tee -a log-install.txt
-echo "   - Nginx                      : 89"  | tee -a log-install.txt
-echo "   - XRAYS TROJAN WS TLS        : 443"  | tee -a log-install.txt
-echo "   - XRAYS SHADOWSOCKS WS TLS   : 443"  | tee -a log-install.txt
-echo "   - XRAYS VLESS WS TLS         : 443"  | tee -a log-install.txt
-echo "   - XRAYS VMESS WS TLS         : 443"  | tee -a log-install.txt
-echo "   - XRAYS TROJAN WS HTTP       : 80"  | tee -a log-install.txt
-echo "   - XRAYS SHADOWSOCKS WS HTTP  : 80"  | tee -a log-install.txt
-echo "   - XRAYS VLESS WS HTTP        : 80"  | tee -a log-install.txt
-echo "   - XRAYS VMESS WS HTTP        : 80"  | tee -a log-install.txt
-echo "   - XRAYS TROJAN GRPC          : 443"  | tee -a log-install.txt
-echo "   - XRAYS SHADOWSOCKS GRPC     : 443"  | tee -a log-install.txt
-echo "   - XRAYS VMESS GRPC           : 443"  | tee -a log-install.txt
-echo "   - XRAYS VLESS GRPC           : 443"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
-echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
-echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
-echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
-echo "   - IPtables                : [ON]"  | tee -a log-install.txt
-echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
-echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On 05.00 GMT +7" | tee -a log-install.txt
-echo "   - Autobackup Data" | tee -a log-install.txt
-echo "   - Restore Data" | tee -a log-install.txt
-echo "   - Auto Delete Expired Account" | tee -a log-install.txt
-echo "   - Full Orders For Various Services" | tee -a log-install.txt
-echo "   - White Label" | tee -a log-install.txt
-echo "   - Installation Log --> /root/log-install.txt"  | tee -a log-install.txt
 echo " Reboot 15 Sec"
 sleep 15
 cd
-rm -rf updatedll
-rm -rf updatedll.sh
 rm -rf setup.sh
-rm -rf install-xray.sh
-rm -rf install-tools.sh
+rm -rf tools.sh
+rm -rf xray.sh
+rm -rf ssh.sh
+rm -rf sslh.sh
+rm -rf stunnel5.sh
+rm -rf websocket.sh
+rm -rf install-menu.sh
+reboot
