@@ -33,8 +33,6 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/tools.s
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/xray.sh && chmod +x xray.sh && ./xray.sh
 #Instal Xray Certificate
 wget -O /usr/bin/certxray "https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu-xray/certxray.sh";chmod +x /usr/bin/certxray;/usr/bin/certxray
-
-wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/certxray.sh && chmod +x certxray.sh && ./certxray.sh
 #Instal SSH
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/ssh/ssh.sh && chmod +x ssh.sh && ./ssh.sh
 #Instal SSLH
