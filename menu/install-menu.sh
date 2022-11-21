@@ -14,6 +14,3 @@ chmod +x /usr/bin/add-xray
 
 #
 cd
-
-
-wget -r https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu/menu-ssh
