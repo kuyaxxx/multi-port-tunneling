@@ -28,7 +28,6 @@ echo "IP=" >> /var/lib/crot/ipvps.conf
 cd
 #install tools/alat
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/tools.sh && chmod +x tools.sh && ./tools.sh
-#
 #Instal Xray
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/xray/xray.sh && chmod +x xray.sh && ./xray.sh
 #Instal Xray Certificate
@@ -43,7 +42,6 @@ wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/stunnel
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/websocket/websocket.sh && chmod +x websocket.sh && ./websocket.sh
 #install menu
 wget https://raw.githubusercontent.com/kuyaxxx/multi-port-tunneling/main/menu/install-menu.sh && chmod +x install-menu.sh && ./install-menu.sh
-#
 #SELESAI
 echo " Reboot 15 Sec"
 sleep 15
