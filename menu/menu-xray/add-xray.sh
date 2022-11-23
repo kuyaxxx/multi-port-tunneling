@@ -92,7 +92,7 @@ shadowsockslink1="ss://${shadowsocks_base64e}@$domain:$tls?plugin=xray-plugin;mu
 systemctl restart xray
 rm -rf /tmp/log
 rm -rf /tmp/log1
-cat > /root/public_html/ss-ws-$user.txt <<-END
+cat > /home/ncr/public_html/ss-ws-$user.txt <<-END
 { 
  "dns": {
     "servers": [
@@ -199,7 +199,7 @@ cat > /root/public_html/ss-ws-$user.txt <<-END
   "stats": {}
 }
 END
-cat > /root/public_html/ss-grpc-$user.txt <<-END
+cat > /home/ncr/public_html/ss-grpc-$user.txt <<-END
 {
     "dns": {
     "servers": [
@@ -308,61 +308,61 @@ END
 #
 #buatvmess
 clear
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
-echo -e "========= XRAY Multi Port =========" | tee -a /root/log-create-user.log
-echo -e "INFORMASI AKUN VPN XRAY" | tee -a /root/log-create-user.log
-echo -e "IP: $MYIP" | tee -a /root/log-create-user.log
-echo -e "Host/Domain: $domain" | tee -a /root/log-create-user.log
-echo -e "Password/ID: $uuid" | tee -a /root/log-create-user.log
-echo -e "====== Service Port =======" | tee -a /root/log-create-user.log
-echo -e "Websocket TLS  : 443" | tee -a /root/log-create-user.log
-echo -e "Websocket HTTP : 80" | tee -a /root/log-create-user.log
-echo -e "GRPC TLS       : 443" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
+echo -e "========= XRAY Multi Port =========" | tee -a /home/ncr/log-create-user.log
+echo -e "INFORMASI AKUN VPN XRAY" | tee -a /home/ncr/log-create-user.log
+echo -e "IP: $MYIP" | tee -a /home/ncr/log-create-user.log
+echo -e "Host/Domain: $domain" | tee -a /home/ncr/log-create-user.log
+echo -e "Password/ID: $uuid" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Service Port =======" | tee -a /home/ncr/log-create-user.log
+echo -e "Websocket TLS  : 443" | tee -a /home/ncr/log-create-user.log
+echo -e "Websocket HTTP : 80" | tee -a /home/ncr/log-create-user.log
+echo -e "GRPC TLS       : 443" | tee -a /home/ncr/log-create-user.log
 echo -e "* Note OPOK: opok only supports coremeta"
 echo -e "* Note SHADOWSOCKS: gunakan custom config atau plugin xray"
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
 
-echo -e "Protokol VPN: TROJAN" | tee -a /root/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
-echo -e "====== Path =======" | tee -a /root/log-create-user.log
-echo -e "=> WS TLS : /xraytrojanws" | tee -a /root/log-create-user.log
-echo -e "=> GRPC   : trojan-grpc" | tee -a /root/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xraytrojanws" | tee -a /root/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /root/log-create-user.log
-echo -e "Link Config WS TLS   : $trojanlinkws" | tee -a /root/log-create-user.log
-echo -e "Link Config GRPC TLS : $trojanlinkgrpc" | tee -a /root/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "Protokol VPN: TROJAN" | tee -a /home/ncr/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Path =======" | tee -a /home/ncr/log-create-user.log
+echo -e "=> WS TLS : /xraytrojanws" | tee -a /home/ncr/log-create-user.log
+echo -e "=> GRPC   : trojan-grpc" | tee -a /home/ncr/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xraytrojanws" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Import Config From Clipboard =======" | tee -a /home/ncr/log-create-user.log
+echo -e "Link Config WS TLS   : $trojanlinkws" | tee -a /home/ncr/log-create-user.log
+echo -e "Link Config GRPC TLS : $trojanlinkgrpc" | tee -a /home/ncr/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
 
-echo -e "Protokol VPN: SHADOWSOCKS" | tee -a /root/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
-echo -e "Method Cipers : aes-128-gcm" | tee -a /root/log-create-user.log
-echo -e "====== Path =======" | tee -a /root/log-create-user.log
-echo -e "=> WS TLS : /xrayssws" | tee -a /root/log-create-user.log
-echo -e "=> GRPC   : ss-grpc" | tee -a /root/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayssws" | tee -a /root/log-create-user.log
-echo -e "======Custom Import Config From URL =======" | tee -a /root/log-create-user.log
-echo -e "URL Custom Config WS TLS   : http://${domain}:89/ss-ws-$user.txt" | tee -a /root/log-create-user.log
-echo -e "URL Custom Config GRPC TLS : http://${domain}:89/ss-grpc-$user.txt" | tee -a /root/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "Protokol VPN: SHADOWSOCKS" | tee -a /home/ncr/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /home/ncr/log-create-user.log
+echo -e "Method Cipers : aes-128-gcm" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Path =======" | tee -a /home/ncr/log-create-user.log
+echo -e "=> WS TLS : /xrayssws" | tee -a /home/ncr/log-create-user.log
+echo -e "=> GRPC   : ss-grpc" | tee -a /home/ncr/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayssws" | tee -a /home/ncr/log-create-user.log
+echo -e "======Custom Import Config From URL =======" | tee -a /home/ncr/log-create-user.log
+echo -e "URL Custom Config WS TLS   : http://${domain}:89/ss-ws-$user.txt" | tee -a /home/ncr/log-create-user.log
+echo -e "URL Custom Config GRPC TLS : http://${domain}:89/ss-grpc-$user.txt" | tee -a /home/ncr/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
 
-echo -e "Protokol VPN: VLESS" | tee -a /root/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
-echo -e "====== Path =======" | tee -a /root/log-create-user.log
-echo -e "=> WS TLS : /xrayws" | tee -a /root/log-create-user.log
-echo -e "=> GRPC   : vless-grpc" | tee -a /root/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayws" | tee -a /root/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /root/log-create-user.log
-echo -e "Link Config WS TLS    : $vlesslinkws" | tee -a /root/log-create-user.log
-echo -e "Link Config GRPC TLS  : $vlesslinkgrpc" | tee -a /root/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
-echo -e "Protokol VPN: VMESS" | tee -a /root/log-create-user.log
-echo -e "Alter ID: 0" | tee -a /root/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
-echo -e "====== Path =======" | tee -a /root/log-create-user.log
-echo -e "=> WS TLS : /xrayvws" | tee -a /root/log-create-user.log
-echo -e "=> GRPC   : vmess-grpc" | tee -a /root/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayvws" | tee -a /root/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
-echo -e "SCRIPT NCR XRAY" | tee -a /root/log-create-user.log
-echo "" | tee -a /root/log-create-user.log
+echo -e "Protokol VPN: VLESS" | tee -a /home/ncr/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Path =======" | tee -a /home/ncr/log-create-user.log
+echo -e "=> WS TLS : /xrayws" | tee -a /home/ncr/log-create-user.log
+echo -e "=> GRPC   : vless-grpc" | tee -a /home/ncr/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayws" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Import Config From Clipboard =======" | tee -a /home/ncr/log-create-user.log
+echo -e "Link Config WS TLS    : $vlesslinkws" | tee -a /home/ncr/log-create-user.log
+echo -e "Link Config GRPC TLS  : $vlesslinkgrpc" | tee -a /home/ncr/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
+echo -e "Protokol VPN: VMESS" | tee -a /home/ncr/log-create-user.log
+echo -e "Alter ID: 0" | tee -a /home/ncr/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /home/ncr/log-create-user.log
+echo -e "====== Path =======" | tee -a /home/ncr/log-create-user.log
+echo -e "=> WS TLS : /xrayvws" | tee -a /home/ncr/log-create-user.log
+echo -e "=> GRPC   : vmess-grpc" | tee -a /home/ncr/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayvws" | tee -a /home/ncr/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /home/ncr/log-create-user.log
+echo -e "SCRIPT NCR XRAY" | tee -a /home/ncr/log-create-user.log
+echo "" | tee -a /home/ncr/log-create-user.log
 cd

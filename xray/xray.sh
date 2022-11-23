@@ -1,12 +1,5 @@
 #!/bin/bash
-MYIP=$(wget -qO- ipinfo.io/ip);
-clear
 domain=$(cat /etc/xray/domain)
-sleep 1
-##mkdir -p /etc/xray 
-#
-apt install iptables iptables-persistent -y
-sleep 1
 #
 ntpdate pool.ntp.org 
 timedatectl set-ntp true
@@ -23,31 +16,18 @@ sleep 1
 #
 chronyc sourcestats -v
 chronyc tracking -v
-#
-apt clean all && apt update
-apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
-apt install socat cron bash-completion ntpdate -y
-ntpdate pool.ntp.org
-apt -y install chrony
-apt install zip -y
-apt install curl pwgen openssl netcat cron -y
-
 # install xray
 sleep 1
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 # Make Folder XRay
 mkdir -p /var/log/xray
-##mkdir -p /etc/xray
 chown www-data.www-data /var/log/xray
 chmod +x /var/log/xray
 touch /var/log/xray/access.log
 touch /var/log/xray/error.log
 touch /var/log/xray/access2.log
 touch /var/log/xray/error2.log
-# / / Ambil Xray Core Version Terbaru
-#bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.5.6
-
 # / / Ambil Xray Core Version Terbaru
 latest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 
@@ -65,12 +45,18 @@ unzip -q xray.zip && rm -rf xray.zip
 mv xray /usr/local/bin/xray
 chmod +x /usr/local/bin/xray
 
+useradd -m ncr;
+mkdir -p /home/ncr/public_html
+echo "<?php phpinfo() ?>" > /home/ncr/public_html/info.php
+chown -R www-data:www-data /home/ncr/public_html
+chmod -R g+rw /home/ncr/public_html
+
 ## hapus
-rm -rf /etc/nginx/conf.d/alone.conf
+#rm -rf /etc/nginx/conf.d/alone.conf
 # stop
-/etc/init.d/nginx stop
-systemctl stop nginx
-mkdir -p /home/me/public_html
+#/etc/init.d/nginx stop
+#systemctl stop nginx
+#mkdir -p /home/ncr/public_html
 
 # / / Ambil Xray Core Version Terbaru
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.5.6
@@ -366,3 +352,8 @@ Restart=on-abort
 [Install]
 WantedBy=multi-user.target
 EOF
+
+systemctl enable xray
+systemctl restart xray
+systemctl enable superxray
+systemctl restart superxray
