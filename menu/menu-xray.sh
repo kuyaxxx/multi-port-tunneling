@@ -18,21 +18,21 @@ color3='\e[0m'
 clear
 echo -e ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[44;1;39m            ⇱ MENU XRAY ⇲             \E[0m"
+echo -e "\E[44;1;39m                  ⇱ XRAY ⇲                      \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "❇️ 1. ADD ACCOUNT"
-echo -e "❇️ 2. DEL ACCOUNT"
-echo -e "❇️ 3. CEK STATUS"
-echo -e "❇️ 4. UPDATE MENU"
-echo -e "❇️ 5. SETTINGS MENU"
-echo -e "❇️ 6. Exit/Keluar"
+echo -e "❇️  1. Create Account"
+echo -e "❇️  2. Delete Account"
+echo -e "❇️  3. Extending Account"
+echo -e "❇️  4. Check User Login"
+echo -e "❇️  5. Renew Certificate"
+echo -e "❇️  x. Exit/Keluar"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[44;1;39m            ⇱ MENU XRAY ⇲             \E[0m"
+echo -e "\E[44;1;39m                  ⇱ XRAY ⇲                      \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-read -p "     Select From Options [1-69 or x] :  " menu
+read -p "     Select From Options [1-5 or x] :  " menu
 case $menu in 
 1)
-menu-ssh
+add-xray
 ;;
 2)
 menu-xray
@@ -45,9 +45,6 @@ menu-update
 ;;
 5)
 menu-setting
-;;
-6)
-exit
 ;;
 *)
 clear

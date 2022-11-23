@@ -1,24 +1,14 @@
 #!/bin/bash
-# SL
 # ==========================================
+# Color
+RED='\033[0;31m'
+NC='\033[0m'
 GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
-NC='\033[0m'
-yl='\e[32;1m'
-bl='\e[36;1m'
-gl='\e[32;1m'
-rd='\e[31;1m'
-mg='\e[0;95m'
-blu='\e[34m'
-op='\e[35m'
-or='\033[1;33m'
-bd='\e[1m'
-color1='\e[031;1m'
-color2='\e[34;1m'
-color3='\e[0m'
-# Getting
-# Color
+LIGHT='\033[0;37m'
 # ==========================================
 # Getting
 MYIP=$(wget -qO- ipinfo.io/ip);
@@ -32,26 +22,21 @@ echo -e "${NC}${LIGHT}Fuck You!!"
 exit 0
 fi
 clear
-source /var/lib/crot/ipvps.conf
-if [[ "$IP" = "" ]]; then
 domain=$(cat /etc/xray/domain)
-else
-domain=$IP
-fi
-tr="$(cat ~/log-install.txt | grep -w "Trojan WS " | cut -d: -f2|sed 's/ //g')"
+#tr="$(cat ~/log-install.txt | grep -w "Trojan WS " | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${user_EXISTS} == '0' ]]; do
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\E[0;41;36m           XRAY ALL ACCOUNT          \E[0m"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+echo -e "\E[44;1;39m                  ⇱ XRAY ⇲                      \E[0m"
+echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 
 		read -rp "User: " -e user
 		user_EXISTS=$(grep -w $user /etc/xray/config.json | wc -l)
 
 		if [[ ${user_EXISTS} == '1' ]]; then
 clear
-		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-		echo -e "\E[0;41;36m           XRAY ALL ACCOUNT          \E[0m"
-		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
+    echo -e "\E[44;1;39m                  ⇱ XRAY ⇲                      \E[0m"
+    echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 			echo ""
 			echo "A client with the specified name was already created, please choose another name."
 			echo ""
@@ -60,6 +45,7 @@ clear
 			menu
 		fi
 	done
+#
 #
 uuid=$(cat /proc/sys/kernel/random/uuid)
 read -p "Expired (days): " masaaktif
@@ -79,99 +65,18 @@ sed -i '/#vmess$/a\#& '"$user $exp"'\
 sed -i '/#vmessgrpc$/a\#& '"$user $exp"'\
 },{"id": "'""$uuid""'","email": "'""$user""'"' /etc/xray/config.json
 
-#
-cat>/etc/xray/vmess-$user-tls.json<<EOF
-      {
-      "v": "2",
-      "ps": "${user}",
-      "add": "${domain}",
-      "port": "443",
-      "id": "${uuid}",
-      "aid": "0",
-      "net": "ws",
-      "path": "/xrayvws",
-      "type": "none",
-      "host": "",
-      "tls": "tls"
-}
-EOF
-cat>/etc/xray/vmess-$user-nontls.json<<EOF
-      {
-      "v": "2",
-      "ps": "${user}",
-      "add": "${domain}",
-      "port": "80",
-      "id": "${uuid}",
-      "aid": "0",
-      "net": "ws",
-      "path": "/xrayvws",
-      "type": "none",
-      "host": "",
-      "tls": "none"
-}
-EOF
-vmess_base641=$( base64 -w 0 <<< $vmess_json1)
-vmess_base642=$( base64 -w 0 <<< $vmess_json2)
-vmesslinkws="vmess://$(base64 -w 0 /etc/xray/vmess-$user-tls.json)"
-nonvmesslinkws="vmess://$(base64 -w 0 /etc/xray/vmess-$user-nontls.json)"
-###
-cat>/etc/xray/vmess-$user-tls.json<<EOF
-      {
-      "v": "4",
-      "ps": "🔰VMESS GRPC TLS ${user}",
-      "add": "${domain}",
-      "port": "443",
-      "id": "${uuid}",
-      "aid": "0",
-      "net": "grpc",
-      "path": "vmess-grpc",
-      "type": "none",
-      "host": "${domain}",
-      "tls": "tls"
-}
-EOF
-#
-#GRPC
-cat>/etc/xray/vmess-$user-nontls.json<<EOF
-      {
-      "v": "4",
-      "ps": "🔰VMESS GRPC NONTLS ${user}",
-      "add": "${domain}",
-      "port": "80",
-      "id": "${uuid}",
-      "aid": "0",
-      "net": "grpc",
-      "path": "vmess-grpc",
-      "type": "none",
-      "host": "${domain}",
-      "tls": "none"
-}
-EOF
-#GRPC
-vmess_base641=$( base64 -w 0 <<< vmess_json1)
-vmess_base642=$( base64 -w 0 <<< $vmess_json2)
-vmesslinkgrpc="vmess://$(base64 -w 0 /etc/xray/vmess-$user-tls.json)"
-nonvmesslinkgrpc="vmess://$(base64 -w 0 /etc/xray/vmess-$user-nontls.json)"
-rm -rf /etc/xray/vmess-$user-tls.json
-rm -rf /etc/xray/vmess-$user-nontls.json
-#GRPC
-###
-systemctl restart xray
-#buatvless WEBSOCKET
-vlesslinkws="vless://${uuid}@${domain}:443?path=/xrayws&security=tls&encryption=none&type=ws#${user}"
-vlesslinknon="vless://${uuid}@${domain}:80?path=/xrayws&security=none&encryption=none&type=ws#${user}"
-#buatvless GRPC
-vlesslinkgrpc="vless://${uuid}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
-vlesslinknon="vless://${uuid}@${domain}:80?mode=gun&security=none&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
 
-#buattrojan 443
+#
+systemctl restart xray
+#buatvless
+vlesslinkws="vless://${uuid}@${domain}:443?path=/xrayws&security=tls&encryption=none&type=ws#${user}"
+vlesslinknon="vless://${uuid}@${domain}:80?path=/xrayws&encryption=none&type=ws#${user}"
+vlesslinkgrpc="vless://${uuid}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
+
+#buattrojan
 trojanlinkgrpc="trojan://${uuid}@${domain}:443?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
 trojanlinkws="trojan://${uuid}@${domain}:443?path=/xraytrojanws&security=tls&host=bug.com&type=ws&sni=bug.com#${user}"
-
-#buattrojan 80
-trojanlinkgrpc="trojan://${uuid}@${domain}:80?mode=gun&security=none&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
-trojanlinkws="trojan://${uuid}@${domain}:80?path=/xraytrojanws&security=none&host=bug.com&type=ws&sni=bug.com#${user}"
-
+#buatshadowsocks
 #
 cipher="aes-128-gcm"
 sed -i '/#ssws$/a\### '"$user $exp"'\
@@ -184,20 +89,10 @@ echo -n "${shadowsocks_base64}" | base64 > /tmp/log1
 shadowsocks_base64e=$(cat /tmp/log1)
 shadowsockslink="ss://${shadowsocks_base64e}@$domain:$tls?plugin=xray-plugin;mux=0;path=/xrayssws;host=$domain;tls#${user}"
 shadowsockslink1="ss://${shadowsocks_base64e}@$domain:$tls?plugin=xray-plugin;mux=0;serviceName=ss-grpc;host=$domain;tls#${user}"
-
-#buat ss WEBSOCKET
-sslinkws="ss://${shadowsocks_base64e}@${domain}:443?path=/xrayssws&security=tls&encryption=none&type=ws#${user}"
-nonsslinkws="ss://${shadowsocks_base64e}@${domain}:80?path=/xrayssws&security=none&encryption=none&type=ws#${user}"
-
-#buat ss GRPC
-sslinkgrpc="ss://${shadowsocks_base64e}@${domain}:443?mode=gun&security=tls&encryption=none&type=grpc&serviceName=ssgrpc&sni=bug.com#${user}"
-nonsslinkgrpc="ss://${shadowsocks_base64e}@${domain}:80?mode=gun&security=none&encryption=none&type=grpc&serviceName=ssgrpc&sni=bug.com#${user}"
-
 systemctl restart xray
-#buatshadowsocks custom
 rm -rf /tmp/log
 rm -rf /tmp/log1
-cat > /home/vps/public_html/ss-ws-$user.txt <<-END
+cat > /root/public_html/ss-ws-$user.txt <<-END
 { 
  "dns": {
     "servers": [
@@ -304,7 +199,7 @@ cat > /home/vps/public_html/ss-ws-$user.txt <<-END
   "stats": {}
 }
 END
-cat > /home/vps/public_html/ss-grpc-$user.txt <<-END
+cat > /root/public_html/ss-grpc-$user.txt <<-END
 {
     "dns": {
     "servers": [
@@ -409,79 +304,65 @@ cat > /home/vps/public_html/ss-grpc-$user.txt <<-END
   "stats": {}
 }
 END
+
 #
-#
+#buatvmess
 clear
-echo -e "
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}" | tee -a /etc/log-create-user.log
-echo -e "\E[44;1;39m            ⇱ BUAT SEMUA AKUN XRAY ⇲             \E[0m" | tee -a /etc/log-create-user.log
-echo -e "\E[44;1;39m            ⇱ XRAY MANTAPV3 Multi All Port ⇲             \E[0m" | tee -a /etc/log-create-user.log
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
-echo -e "=========INFORMASI AKUN VPN XRAY=========" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
-echo -e "IP: $MYIP" | tee -a /etc/log-create-user.log
-echo -e "Host/Domain: $domain" | tee -a /etc/log-create-user.log
-echo -e "Password/ID: $uuid" | tee -a /etc/log-create-user.log
-echo -e "====== Service Port =======" | tee -a /etc/log-create-user.log
-echo -e "Websocket SSL/TLS: 443" | tee -a /etc/log-create-user.log
-echo -e "Websocket HTTP/NONE TLS: 80" | tee -a /etc/log-create-user.log
-echo -e "GRPC SSL/TLS: 443" | tee -a /etc/log-create-user.log
-echo -e "GRPC HTTP/NONE TLS: 80" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "========= XRAY Multi Port =========" | tee -a /root/log-create-user.log
+echo -e "INFORMASI AKUN VPN XRAY" | tee -a /root/log-create-user.log
+echo -e "IP: $MYIP" | tee -a /root/log-create-user.log
+echo -e "Host/Domain: $domain" | tee -a /root/log-create-user.log
+echo -e "Password/ID: $uuid" | tee -a /root/log-create-user.log
+echo -e "====== Service Port =======" | tee -a /root/log-create-user.log
+echo -e "Websocket TLS  : 443" | tee -a /root/log-create-user.log
+echo -e "Websocket HTTP : 80" | tee -a /root/log-create-user.log
+echo -e "GRPC TLS       : 443" | tee -a /root/log-create-user.log
+echo -e "* Note OPOK: opok only supports coremeta"
+echo -e "* Note SHADOWSOCKS: gunakan custom config atau plugin xray"
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
 
-echo -e "Protokol VPN: TROJAN" | tee -a /etc/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /etc/log-create-user.log
-echo -e "====== Path/ServiceName =======" | tee -a /etc/log-create-user.log
-echo -e "=> WS TLS : /xraytrojanws" | tee -a /etc/log-create-user.log
-echo -e "=> GRPC   : trojan-grpc" | tee -a /etc/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xraytrojanws" | tee -a /etc/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS TLS   : $trojanlinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC TLS : $trojanlinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS HTTP/NONE TLS   : $nontrojanlinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC HTTP/NONE TLS : $nontrojanlinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
+echo -e "Protokol VPN: TROJAN" | tee -a /root/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
+echo -e "====== Path =======" | tee -a /root/log-create-user.log
+echo -e "=> WS TLS : /xraytrojanws" | tee -a /root/log-create-user.log
+echo -e "=> GRPC   : trojan-grpc" | tee -a /root/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xraytrojanws" | tee -a /root/log-create-user.log
+echo -e "====== Import Config From Clipboard =======" | tee -a /root/log-create-user.log
+echo -e "Link Config WS TLS   : $trojanlinkws" | tee -a /root/log-create-user.log
+echo -e "Link Config GRPC TLS : $trojanlinkgrpc" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
 
-echo -e "Protokol VPN: SHADOWSOCKS" | tee -a /etc/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /etc/log-create-user.log
-echo -e "Method Cipers : aes-128-gcm" | tee -a /etc/log-create-user.log
-echo -e "====== Path/ServiceName =======" | tee -a /etc/log-create-user.log
-echo -e "=> WS TLS : /xrayssws" | tee -a /etc/log-create-user.log
-echo -e "=> GRPC   : ss-grpc" | tee -a /etc/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayssws" | tee -a /etc/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /etc/log-create-user.log
-echo -e "URL Config WS TLS   : sslinkws" | tee -a /etc/log-create-user.log
-echo -e "URL Config GRPC TLS : sslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS HTTP/NONE TLS   : $nonsslinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC HTTP/NONE TLS : $nonsslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
+echo -e "Protokol VPN: SHADOWSOCKS" | tee -a /root/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
+echo -e "Method Cipers : aes-128-gcm" | tee -a /root/log-create-user.log
+echo -e "====== Path =======" | tee -a /root/log-create-user.log
+echo -e "=> WS TLS : /xrayssws" | tee -a /root/log-create-user.log
+echo -e "=> GRPC   : ss-grpc" | tee -a /root/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayssws" | tee -a /root/log-create-user.log
+echo -e "======Custom Import Config From URL =======" | tee -a /root/log-create-user.log
+echo -e "URL Custom Config WS TLS   : http://${domain}:89/ss-ws-$user.txt" | tee -a /root/log-create-user.log
+echo -e "URL Custom Config GRPC TLS : http://${domain}:89/ss-grpc-$user.txt" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
 
-echo -e "Protokol VPN: VLESS" | tee -a /etc/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /etc/log-create-user.log
-echo -e "====== Path/ServiceName =======" | tee -a /etc/log-create-user.log
-echo -e "=> WS TLS : /xrayws" | tee -a /etc/log-create-user.log
-echo -e "=> GRPC   : vless-grpc" | tee -a /etc/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayws" | tee -a /etc/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS TLS    : $vlesslinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC TLS  : $vlesslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS HTTP/NONE TLS   : $nonvlesslinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC HTTP/NONE TLS : $nonvlesslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
-echo -e "Protokol VPN: VMESS" | tee -a /etc/log-create-user.log
-echo -e "Alter ID: 0" | tee -a /etc/log-create-user.log
-echo -e "Network: WS/GRPC" | tee -a /etc/log-create-user.log
-echo -e "====== Path/ServiceName =======" | tee -a /etc/log-create-user.log
-echo -e "=> WS TLS : /xrayvws" | tee -a /etc/log-create-user.log
-echo -e "=> GRPC   : vmess-grpc" | tee -a /etc/log-create-user.log
-echo -e "=> OPOK   : ws://bugcom/xrayvws" | tee -a /etc/log-create-user.log
-echo -e "====== Import Config From Clipboard =======" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS TLS    : $vmesslinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC TLS  : $vmesslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "Link Config WS HTTP/NONE TLS   : $nonvmesslinkws" | tee -a /etc/log-create-user.log
-echo -e "Link Config GRPC HTTP/NONE TLS : $nonvmesslinkgrpc" | tee -a /etc/log-create-user.log
-echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /etc/log-create-user.log
-echo -e "SCRIPT MANTAPV3 by SL" | tee -a /etc/log-create-user.log
-echo "" | tee -a /etc/log-create-user.log
+echo -e "Protokol VPN: VLESS" | tee -a /root/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
+echo -e "====== Path =======" | tee -a /root/log-create-user.log
+echo -e "=> WS TLS : /xrayws" | tee -a /root/log-create-user.log
+echo -e "=> GRPC   : vless-grpc" | tee -a /root/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayws" | tee -a /root/log-create-user.log
+echo -e "====== Import Config From Clipboard =======" | tee -a /root/log-create-user.log
+echo -e "Link Config WS TLS    : $vlesslinkws" | tee -a /root/log-create-user.log
+echo -e "Link Config GRPC TLS  : $vlesslinkgrpc" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "Protokol VPN: VMESS" | tee -a /root/log-create-user.log
+echo -e "Alter ID: 0" | tee -a /root/log-create-user.log
+echo -e "Network: WS/GRPC" | tee -a /root/log-create-user.log
+echo -e "====== Path =======" | tee -a /root/log-create-user.log
+echo -e "=> WS TLS : /xrayvws" | tee -a /root/log-create-user.log
+echo -e "=> GRPC   : vmess-grpc" | tee -a /root/log-create-user.log
+echo -e "=> OPOK   : ws://bugcom/xrayvws" | tee -a /root/log-create-user.log
+echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" | tee -a /root/log-create-user.log
+echo -e "SCRIPT NCR XRAY" | tee -a /root/log-create-user.log
+echo "" | tee -a /root/log-create-user.log
 cd

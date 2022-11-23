@@ -201,11 +201,11 @@ echo -e "❇️  2. XRAY MENU"
 echo -e "❇️  3. CEK MENU"
 echo -e "❇️  4. UPDATE MENU"
 echo -e "❇️  5. SETTINGS MENU"
-echo -e "❇️  6. Exit/Keluar"
+echo -e "❇️  x. Exit/Keluar"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "\E[44;1;39m                   ⇱ MENU ⇲                     \E[0m"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-read -p "     Select From Options [1-69 or x] :  " menu
+read -p "     Select From Options [1-5 or x] :  " menu
 case $menu in 
 1)
 menu-ssh
@@ -222,11 +222,7 @@ menu-update
 5)
 menu-setting
 ;;
-6)
-exit
-;;
 *)
-clear
-menu
+exit
 ;;
 esac
