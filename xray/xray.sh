@@ -45,7 +45,15 @@ unzip -q xray.zip && rm -rf xray.zip
 mv xray /usr/local/bin/xray
 chmod +x /usr/local/bin/xray
 
-useradd -m ncr;
+#! /bin/bash
+USER_NAME=ncr
+cat /etc/passwd | grep ${USER_NAME} >/dev/null 2>&1
+if [ $? -eq 0 ] ; then
+    echo "User Exists"
+else
+    echo "Add User ncr"
+    useradd -m ncr;
+fi
 mkdir -p /home/ncr/public_html
 echo "<?php phpinfo() ?>" > /home/ncr/public_html/info.php
 chown -R www-data:www-data /home/ncr/public_html
